@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PortfolioSite</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="#work-experience">
+                        <img class="header-icon" src="/image/briefcase.svg" alt="briefcase icon for workexperience" />
+                        <p>Werkervaring</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#education">
+                        <img class="header-icon" src="/image/graduationcap.svg" alt="graduation cap icon for education" />
+                        <p>Opleidingen</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#projects">
+                        <img class="header-icon" src="/image/apps.svg" alt="appcontainer icon for workexperience" />
+                        <p>Projecten</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div>
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+        <div>
+            <h1>Contact</h1>
+        </div>
+        <div class="v-container">
+            <h2>Telefoon</h2>
+            <a href="tel:+31612345678">+31 6 12345678</a>
+        </div>
+        <div>
+            <h2>Email</h2>
+            <a href="mailto:johndoe@mail.com">johndoe@mail.com</a>
+        </div>
+    </footer>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
