@@ -13,6 +13,16 @@
     transition: ease-in-out 0.5s;
 }
 
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 p {
     font-size: var(--text-size);
 }
@@ -39,15 +49,6 @@ header {
             justify-content: space-evenly;
             align-items: center;
 
-            > li:hover {
-                p {
-                    transition: ease-in-out .5s;
-                    border-radius: 1rem;
-                    padding: 1rem;
-                    background-color: var(--secondary-bg);
-                }
-            }
-
             > li {
                 margin: 0 1rem;
                 height: 80%;
@@ -55,6 +56,10 @@ header {
                 width: 100%;
                 display: flex;
                 justify-content: center;
+
+                p {
+                    transition: ease-in-out .5s;
+                }
 
                 .header-icon {
                     display: none;
@@ -240,6 +245,16 @@ section {
     header {
         padding: 1.5rem 0;
 
+
+        > nav > ul > li:hover {
+            p {
+                border-radius: 1rem;
+                padding: 1rem;
+                background-color: var(--secondary-bg);
+                border: 2px solid black;
+            }
+        }
+
         > nav > ul > li {
             .header-icon {
                 display: block;
@@ -293,12 +308,35 @@ section {
     }
 
     footer {
-        margin-top: 4rem;
+        margin-top: 3rem;
+
+        a {
+            transition: ease-in-out 1s;
+            position: absolute;
+            border-radius: .5rem;
+        }
+
+            a:hover {
+                font-size: 5rem;
+                transform: translate(-15rem, -7rem);
+                background-color: white;
+                border: 2px solid black;
+                padding: 1rem;
+            }
     }
 
     section {
         padding: 0 3rem;
         margin: 1rem 5rem;
+    }
+
+    #portrait {
+        animation: spin 15s linear infinite;
+        animation-play-state: paused;
+    }
+
+    #portrait:hover {
+        animation-play-state: running;
     }
 
     #education {
