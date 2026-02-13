@@ -10,17 +10,7 @@
     --sub-title-size: 1.5rem;
     --text-size: 1rem;
     scroll-behavior: smooth;
-    transition: ease-in-out 0.5s;
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
+    interpolate-size: allow-keywords;
 }
 
 p {
@@ -59,10 +49,8 @@ header {
                 width: 100%;
                 display: flex;
                 justify-content: center;
+                transition: ease-out 1s;
 
-                p {
-                    transition: ease-in-out .5s;
-                }
 
                 .header-icon {
                     display: none;
@@ -80,10 +68,6 @@ header {
                     font-weight: bold;
                 }
             }
-
-                > li:not(:last-child) {
-                    border-right: 2px solid #FFF;
-                }
         }
 }
 
@@ -122,7 +106,44 @@ footer {
 }
 
 section {
+    scroll-margin-top: 5rem;
     margin: 1rem;
+}
+
+summary {
+    cursor: pointer;
+
+    > div {
+        margin-left: 1rem;
+
+        > h2:last-child {
+            min-width: fit-content;
+        }
+    }
+
+    > div::before {
+        content: '▶';
+        position: absolute;
+        transform: translateX(-1rem);
+        transition: ease-in-out 1s;
+    }
+}
+
+details[open] {
+
+    summary > div::before {
+        transform:rotate(90deg) translatey(1rem);
+    }
+}
+
+details::details-content {
+    height: 0;
+    overflow: hidden;
+    transition: ease-in-out 1s, content-visibility 1s allow-discrete;
+}
+
+details[open]::details-content {
+    height: auto;
 }
 
 #portrait {
@@ -135,6 +156,16 @@ section {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.no-mobile {
+    display: none;
+}
+
+.divider {
+    width: .5rem;
+    background-color: white;
+    height: 80%;
 }
 
 #about {
@@ -173,14 +204,18 @@ section {
             }
         }
 
-        .skillgrid > ul {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
+        .skillgrid {
+            padding-block: 1rem;
 
-            li {
-                list-style: disc;
-                margin: 0.5rem 1.5rem;
+            > ul {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                li {
+                    list-style: disc;
+                    margin: 0.5rem 1.5rem;
+                }
             }
         }
     }
@@ -198,8 +233,17 @@ section {
 
     .h-container {
         justify-content: space-between;
+        margin: 1.5rem 0;
         padding: .2rem 1rem;
         font-size: 1.2rem;
+
+        > p {
+            min-width: 33%;
+        }
+
+        > p:last-child {
+            text-align: right;
+        }
     }
 }
 
@@ -220,9 +264,10 @@ section {
         justify-content: start;
 
         .project {
-            width: 25%;
+            width: 39%;
             height: 8rem;
-            margin: 3.9%;
+            margin: 2%;
+            padding: .5rem;
             background-color: white;
             border: 1px solid black;
             display: flex;
@@ -250,12 +295,11 @@ section {
 
 
         > nav > ul > li:hover {
-            p {
-                border-radius: 1rem;
-                padding: 1rem;
-                background-color: var(--secondary-bg);
-                border: 2px solid black;
-            }
+            border-radius: 1rem;
+            padding: 1rem;
+            background-color: var(--secondary-bg);
+            border: 2px solid black;
+            transition: ease-in .2s;
         }
 
         > nav > ul > li {
@@ -276,7 +320,11 @@ section {
             }
 
             > a {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
+            }
+
+            > a:hover {
+                color: var(--primary-bg);
             }
         }
     }
@@ -299,13 +347,14 @@ section {
         .projectgrid {
 
             .project {
-                margin: 4%;
+                width: 25%;
+                margin: 2%;
             }
         }
     }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 1024px) {
     :root {
         --text-size: 2rem;
     }
@@ -314,18 +363,9 @@ section {
         margin-top: 3rem;
 
         a {
-            transition: ease-in-out 1s;
             position: absolute;
             border-radius: .5rem;
         }
-
-            a:hover {
-                font-size: 5rem;
-                transform: translate(-15rem, -7rem);
-                background-color: white;
-                border: 2px solid black;
-                padding: 1rem;
-            }
     }
 
     section {
@@ -333,13 +373,8 @@ section {
         margin: 1rem 5rem;
     }
 
-    #portrait {
-        animation: spin 15s linear infinite;
-        animation-play-state: paused;
-    }
-
-    #portrait:hover {
-        animation-play-state: running;
+    .no-mobile {
+        display: block;
     }
 
     #education {
@@ -379,6 +414,10 @@ section {
             .project {
                 width: 20%;
                 margin: 2%;
+
+                p {
+                    font-size: calc((var(--text-size)) * 0.7);
+                }
             }
         }
     }
